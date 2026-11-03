@@ -7,6 +7,7 @@
 
 // Function declaration
 void framebuffer_size_callback (GLFWwindow* window, int width, int height);
+void processInput(GLFWwindow *window);
 
 
 int main()
@@ -59,6 +60,11 @@ int main()
     // LOOP
     while (!glfwWindowShouldClose(window))
     {
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);   
+
+        processInput(window);
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -76,3 +82,10 @@ int main()
     {
         glViewport(0,0,width,height);
     }
+
+// Create input for window to close on ESC button being pressed
+void processInput(GLFWwindow *window)
+{
+if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+glfwSetWindowShouldClose(window, true);
+}    
