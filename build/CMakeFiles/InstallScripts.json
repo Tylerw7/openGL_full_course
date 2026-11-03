@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/tylerwettach/Desktop/C++/opengl_course/build/cmake_install.cmake",
+		"/Users/tylerwettach/Desktop/C++/opengl_course/build/_deps/glfw-build/cmake_install.cmake",
+		"/Users/tylerwettach/Desktop/C++/opengl_course/build/_deps/glfw-build/src/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
