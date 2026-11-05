@@ -60,11 +60,59 @@ int main()
     // Vertex Data
     // **********************************************************
 
+    // OpenGL doesn’t simply transform all your 3D coordinates to 2D pixels on your screen; OpenGL
+    // only processes 3D coordinates when they’re in a specific range between -1.0 and 1.0 on all 3
+    // axes (x, y and z). All
+
+    // The vertex shader can only take values between -1 and 1. if any other numbers are put in the vertex 
+    // shader will clip those numbers
+
     float vertexData[] = {
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
         0.0f, 0.5f, 0.0f
     };
+
+    // we can send this data to the vertex shader by creating memory in the gpu, first we
+    // can create a Vertex Buffer Object.
+
+    // Sending data from cpu to gpu is slow
+    // By sending it to the gpu in its memory it can access it very fast.
+    // Via the VBO
+    // This object has a unique ID, which can be accessed by glGenBuffers function.
+
+    unsigned int VBO;
+    glGenBuffers(1, &VBO);
+
+    //We can bind the newly created buffer to the GL_ARRAY_BUFFER target with
+    //the glBindBuffer function:
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    // glBufferData is a function specifically targeted to copy user-defined data into the currently
+    // bound buffer. Its first argument is the type of the buffer we want to copy data into: the vertex buffer
+    // object currently bound to the GL_ARRAY_BUFFER target. The second argument specifies the size
+    // of the data (in bytes) we want to pass to the buffer; a simple sizeof of the vertex data suffices.
+    // The third parameter is the actual data we want to send.
+
+    // The fourth parameter specifies how we want the graphics card to manage the given data. This
+    // can take 3 forms:
+    // • GL_STREAM_DRAW: the data is set only once and used by the GPU at most a few times.
+    // • GL_STATIC_DRAW: the data is set only once and used many times.
+    // • GL_DYNAMIC_DRAW: the data is changed a lot and used many times.
+
+    // The position data of the triangle does not change, is used a lot, and stays the same for every
+    // render call so its usage type should best be GL_STATIC_DRAW. If, for instance, one would have a
+    // buffer with data that is likely to change frequently, a usage type of GL_DYNAMIC_DRAW ensures
+    // the graphics card will place the data in memory that allows for faster writes.
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
+
+
+
+
+
+
+
 
 
 
