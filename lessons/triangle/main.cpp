@@ -2,6 +2,7 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <string>
 
 
 
@@ -106,6 +107,30 @@ int main()
     // the graphics card will place the data in memory that allows for faster writes.
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
+
+    // Create our Vertex Shader
+    std::string vertexShaderSource = R"(
+        #version 330 core
+        layout (location = 0) in vec3 aPos;
+
+        void main()
+        {
+            gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+        }
+    )";
+
+    // Compile the shader
+    // The first thing we need to do is create a shader object, again referenced by an ID.
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+    // Converte string literal to c string
+    const char* vertexShaderSourceC_Str = vertexShaderSource.c_str();
+
+    // Next we attach the shader source code to the shader object and compile the shader:
+    glShaderSource(vertexShader, 1, &vertexShaderSourceC_Str, NULL);
+    glCompileShader(vertexShader);
+
 
 
 
