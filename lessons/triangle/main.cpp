@@ -173,8 +173,51 @@ int main()
     glShaderSource(fragmentShader, 1, &fragmentShaderSourceC_Str, NULL);
     glCompileShader(fragmentShader);
 
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+    glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+    std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" <<
+    infoLog << std::endl;
+
+    }
+
     // Both the shaders are now compiled and the only thing left to do is link both shader objects into a
     // shader program that we can use for rendering. Make sure to check for compile errors here as well!
+
+
+    // Link multiple shaders to form one shader program.
+
+    // When linking the shaders into a program it links the outputs of each shader to the inputs of the
+    // next shader. This is also where you’ll get linking errors if your outputs and inputs do not match.
+
+    // Create program object
+    unsigned int shaderProgram;
+    shaderProgram = glCreateProgram();
+
+    // The glCreateProgram function creates a program and returns the ID reference to the newly
+    // created program object. Now we need to attach the previously compiled shaders to the program
+    // object and then link them with glLinkProgram:
+
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+    if(!success) {
+    glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+    std::cout << "ERROR: LINKING SHADER PROGRAM ERROR" << std::endl;
+    }
+
+    glUseProgram(shaderProgram);
+
+    // Every shader and rendering call after glUseProgram will now use this program object (and
+    // thus the shaders).
+    // Oh yeah, and don’t forget to delete the shader objects once we’ve linked them into the program
+    // object; we no longer need them anymore:
+
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
 
 
 
