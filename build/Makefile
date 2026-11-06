@@ -176,6 +176,19 @@ glad/fast:
 .PHONY : glad/fast
 
 #=============================================================================
+# Target rules for targets named square
+
+# Build rule for target.
+square: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 square
+.PHONY : square
+
+# fast build rule for target.
+square/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/build
+.PHONY : square/fast
+
+#=============================================================================
 # Target rules for targets named triangle
 
 # Build rule for target.
@@ -264,6 +277,30 @@ external/glad/src/gl.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/external/glad/src/gl.c.s
 .PHONY : external/glad/src/gl.c.s
 
+lessons/square/main.o: lessons/square/main.cpp.o
+.PHONY : lessons/square/main.o
+
+# target to build an object file
+lessons/square/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/lessons/square/main.cpp.o
+.PHONY : lessons/square/main.cpp.o
+
+lessons/square/main.i: lessons/square/main.cpp.i
+.PHONY : lessons/square/main.i
+
+# target to preprocess a source file
+lessons/square/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/lessons/square/main.cpp.i
+.PHONY : lessons/square/main.cpp.i
+
+lessons/square/main.s: lessons/square/main.cpp.s
+.PHONY : lessons/square/main.s
+
+# target to generate assembly for a file
+lessons/square/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/lessons/square/main.cpp.s
+.PHONY : lessons/square/main.cpp.s
+
 lessons/triangle/main.o: lessons/triangle/main.cpp.o
 .PHONY : lessons/triangle/main.o
 
@@ -328,11 +365,15 @@ help:
 	@echo "... update_mappings"
 	@echo "... glad"
 	@echo "... glfw"
+	@echo "... square"
 	@echo "... triangle"
 	@echo "... window"
 	@echo "... external/glad/src/gl.o"
 	@echo "... external/glad/src/gl.i"
 	@echo "... external/glad/src/gl.s"
+	@echo "... lessons/square/main.o"
+	@echo "... lessons/square/main.i"
+	@echo "... lessons/square/main.s"
 	@echo "... lessons/triangle/main.o"
 	@echo "... lessons/triangle/main.i"
 	@echo "... lessons/triangle/main.s"
