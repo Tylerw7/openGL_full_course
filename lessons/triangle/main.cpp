@@ -150,6 +150,32 @@ int main()
 
     }
 
+    // **************************************************************
+    // Fragment Shader
+    // **************************************************************
+
+    // Shader
+    std::string fragmentShaderSource = R"(
+        #version 330 core
+        out vec4 FragColor;
+
+        void main()
+        {
+            FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+        }
+    )";
+
+    // The process for compiling a fragment shader is similar to the vertex shader, although this time
+    // we use the GL_FRAGMENT_SHADER constant as the shader type:
+    unsigned int fragmentShader;
+    const char* fragmentShaderSourceC_Str = fragmentShaderSource.c_str();
+    fragmentShader = (GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSourceC_Str, NULL);
+    glCompileShader(fragmentShader);
+
+    // Both the shaders are now compiled and the only thing left to do is link both shader objects into a
+    // shader program that we can use for rendering. Make sure to check for compile errors here as well!
+
 
 
 
@@ -176,6 +202,8 @@ int main()
 
     return 0;
 }
+
+
 
 
 // We can create a callback function to automatically resizes the window.
