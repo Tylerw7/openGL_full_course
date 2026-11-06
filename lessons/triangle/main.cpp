@@ -132,6 +132,23 @@ int main()
     glCompileShader(vertexShader);
 
 
+    // Next test if the shader was compiled
+    int success;
+    char infoLog [512];
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+
+    // First we define an integer to indicate success and a storage container for the error messages
+    // (if any). Then we check if compilation was successful with glGetShaderiv. If
+    // compilation failed, we should retrieve the error message with glGetShaderInfoLog
+    // and print the error message.
+
+    if(!success)
+    {
+    glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+    std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" <<
+    infoLog << std::endl;
+
+    }
 
 
 
