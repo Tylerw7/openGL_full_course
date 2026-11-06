@@ -4,6 +4,7 @@
 # EXAMPLE_FILES at CMakeLists.txt:40 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/Users/tylerwettach/Desktop/C++/opengl_course/lessons/*/main.cpp")
 set(OLD_GLOB
+  "/Users/tylerwettach/Desktop/C++/opengl_course/lessons/triangle/main.cpp"
   "/Users/tylerwettach/Desktop/C++/opengl_course/lessons/window/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

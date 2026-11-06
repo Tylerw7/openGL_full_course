@@ -64,12 +64,14 @@ CMAKE_BINARY_DIR = /Users/tylerwettach/Desktop/C++/opengl_course/build
 
 # The main recursive "all" target.
 all: CMakeFiles/glad.dir/all
+all: CMakeFiles/triangle.dir/all
 all: CMakeFiles/window.dir/all
 all: _deps/glfw-build/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/glad.dir/codegen
+codegen: CMakeFiles/triangle.dir/codegen
 codegen: CMakeFiles/window.dir/codegen
 codegen: _deps/glfw-build/codegen
 .PHONY : codegen
@@ -80,6 +82,7 @@ preinstall: _deps/glfw-build/preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/glad.dir/clean
+clean: CMakeFiles/triangle.dir/clean
 clean: CMakeFiles/window.dir/clean
 clean: _deps/glfw-build/clean
 .PHONY : clean
@@ -157,6 +160,39 @@ CMakeFiles/glad.dir/clean:
 .PHONY : CMakeFiles/glad.dir/clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/triangle.dir
+
+# All Build rule for target.
+CMakeFiles/triangle.dir/all: CMakeFiles/glad.dir/all
+CMakeFiles/triangle.dir/all: _deps/glfw-build/src/CMakeFiles/glfw.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=25,26 "Built target triangle"
+.PHONY : CMakeFiles/triangle.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/triangle.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles 26
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/triangle.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles 0
+.PHONY : CMakeFiles/triangle.dir/rule
+
+# Convenience name for target.
+triangle: CMakeFiles/triangle.dir/rule
+.PHONY : triangle
+
+# codegen rule for target.
+CMakeFiles/triangle.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=25,26 "Finished codegen for target triangle"
+.PHONY : CMakeFiles/triangle.dir/codegen
+
+# clean rule for target.
+CMakeFiles/triangle.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/clean
+.PHONY : CMakeFiles/triangle.dir/clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/window.dir
 
 # All Build rule for target.
@@ -164,7 +200,7 @@ CMakeFiles/window.dir/all: CMakeFiles/glad.dir/all
 CMakeFiles/window.dir/all: _deps/glfw-build/src/CMakeFiles/glfw.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/window.dir/build.make CMakeFiles/window.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/window.dir/build.make CMakeFiles/window.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=26,27 "Built target window"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=28,29 "Built target window"
 .PHONY : CMakeFiles/window.dir/all
 
 # Build rule for subdir invocation for target.
@@ -181,7 +217,7 @@ window: CMakeFiles/window.dir/rule
 # codegen rule for target.
 CMakeFiles/window.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/window.dir/build.make CMakeFiles/window.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=26,27 "Finished codegen for target window"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=28,29 "Finished codegen for target window"
 .PHONY : CMakeFiles/window.dir/codegen
 
 # clean rule for target.
@@ -260,7 +296,7 @@ _deps/glfw-build/src/CMakeFiles/glfw.dir/clean:
 _deps/glfw-build/src/CMakeFiles/update_mappings.dir/all:
 	$(MAKE) $(MAKESILENT) -f _deps/glfw-build/src/CMakeFiles/update_mappings.dir/build.make _deps/glfw-build/src/CMakeFiles/update_mappings.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/glfw-build/src/CMakeFiles/update_mappings.dir/build.make _deps/glfw-build/src/CMakeFiles/update_mappings.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=25 "Built target update_mappings"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=27 "Built target update_mappings"
 .PHONY : _deps/glfw-build/src/CMakeFiles/update_mappings.dir/all
 
 # Build rule for subdir invocation for target.
@@ -277,7 +313,7 @@ update_mappings: _deps/glfw-build/src/CMakeFiles/update_mappings.dir/rule
 # codegen rule for target.
 _deps/glfw-build/src/CMakeFiles/update_mappings.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/glfw-build/src/CMakeFiles/update_mappings.dir/build.make _deps/glfw-build/src/CMakeFiles/update_mappings.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=25 "Finished codegen for target update_mappings"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles --progress-num=27 "Finished codegen for target update_mappings"
 .PHONY : _deps/glfw-build/src/CMakeFiles/update_mappings.dir/codegen
 
 # clean rule for target.

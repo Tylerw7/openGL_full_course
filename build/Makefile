@@ -176,6 +176,19 @@ glad/fast:
 .PHONY : glad/fast
 
 #=============================================================================
+# Target rules for targets named triangle
+
+# Build rule for target.
+triangle: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 triangle
+.PHONY : triangle
+
+# fast build rule for target.
+triangle/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/build
+.PHONY : triangle/fast
+
+#=============================================================================
 # Target rules for targets named window
 
 # Build rule for target.
@@ -251,6 +264,30 @@ external/glad/src/gl.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/external/glad/src/gl.c.s
 .PHONY : external/glad/src/gl.c.s
 
+lessons/triangle/main.o: lessons/triangle/main.cpp.o
+.PHONY : lessons/triangle/main.o
+
+# target to build an object file
+lessons/triangle/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/lessons/triangle/main.cpp.o
+.PHONY : lessons/triangle/main.cpp.o
+
+lessons/triangle/main.i: lessons/triangle/main.cpp.i
+.PHONY : lessons/triangle/main.i
+
+# target to preprocess a source file
+lessons/triangle/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/lessons/triangle/main.cpp.i
+.PHONY : lessons/triangle/main.cpp.i
+
+lessons/triangle/main.s: lessons/triangle/main.cpp.s
+.PHONY : lessons/triangle/main.s
+
+# target to generate assembly for a file
+lessons/triangle/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/lessons/triangle/main.cpp.s
+.PHONY : lessons/triangle/main.cpp.s
+
 lessons/window/main.o: lessons/window/main.cpp.o
 .PHONY : lessons/window/main.o
 
@@ -291,10 +328,14 @@ help:
 	@echo "... update_mappings"
 	@echo "... glad"
 	@echo "... glfw"
+	@echo "... triangle"
 	@echo "... window"
 	@echo "... external/glad/src/gl.o"
 	@echo "... external/glad/src/gl.i"
 	@echo "... external/glad/src/gl.s"
+	@echo "... lessons/triangle/main.o"
+	@echo "... lessons/triangle/main.i"
+	@echo "... lessons/triangle/main.s"
 	@echo "... lessons/window/main.o"
 	@echo "... lessons/window/main.i"
 	@echo "... lessons/window/main.s"

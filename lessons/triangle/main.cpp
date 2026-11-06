@@ -169,7 +169,7 @@ int main()
     // we use the GL_FRAGMENT_SHADER constant as the shader type:
     unsigned int fragmentShader;
     const char* fragmentShaderSourceC_Str = fragmentShaderSource.c_str();
-    fragmentShader = (GL_FRAGMENT_SHADER);
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSourceC_Str, NULL);
     glCompileShader(fragmentShader);
 
@@ -241,8 +241,8 @@ int main()
     // With this knowledge we can tell OpenGL how it should interpret the vertex data (per vertex
     // attribute) using glVertexAttribPointer:
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+    // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    // glEnableVertexAttribArray(0);
 
     // The first parameter specifies which vertex attribute we want to configure. Remember that we
     // specified the location of the position vertex attribute in the vertex shader with layout
@@ -267,13 +267,31 @@ int main()
     // the stride as 0 to let OpenGL determine the stride (this only works when values are tightly
     // packed). Whenever we have more vertex attributes we have to carefully define the spacing
     // between each vertex attribute but we’ll get to see more examples of that later on.
-    
+
     // • The last parameter is of type void* and thus requires that weird cast. This is the offset of
     // where the position data begins in the buffer. Since the position data is at the start of the data
     // array this value is just 0.
 
+    // Now that we specified how OpenGL should interpret the vertex data we should also enable the
+    // vertex attribute with glEnableVertexAttribArray giving the vertex attribute location as its
+    // argument; vertex attributes are disabled by default.
 
+    unsigned int VAO;
+    glGenVertexArrays(1, &VAO);
 
+    // A vertex array object stores the following:
+    // • Calls to glEnableVertexAttribArray or glDisableVertexAttrib
+    // Array.
+    // • Vertex attribute configurations via glVertexAttribPointer.
+    // • Vertex buffer objects associated with vertex attributes by calls to glVertexAtt
+    // ribPointer.
+
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO); // Technically this code could be omitted because we already called it earlier
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
+    // 3. then set our vertex attributes pointers
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
 
 
 
@@ -286,7 +304,11 @@ int main()
     while (!glfwWindowShouldClose(window))
     {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);   
+        glClear(GL_COLOR_BUFFER_BIT);  
+
+        glUseProgram(shaderProgram); 
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         processInput(window);
 
