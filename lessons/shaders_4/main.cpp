@@ -110,14 +110,58 @@ int main()
     // lot, namely vectors and matrices.
 
 
+
+    // A vector in GLSL is a 1,2,3 or 4 component container for any of the basic types just mentioned.
+    // They can take the following form (n represents the number of components):
+
+    // • vecn: the default vector of n floats.
+    // • bvecn: a vector of n booleans.
+    // • ivecn: a vector of n integers.
+    // • uvecn: a vector of n unsigned integers.
+    // • dvecn: a vector of n double components.
+
+    // Most of the time we will be using the basic vecn since floats are sufficient for most of our
+    // purposes.
+
+
+
+
+    // Components of a vector can be accessed via vec.x where x is the first component of the vector.
+    // You can use .x, .y, .z and .w to access their first, second, third and fourth component respectively.
+    // GLSL also allows you to use rgba for colors or stpq for texture coordinates, accessing the same
+    // components.
+
+    // The vector datatype allows for some interesting and flexible component selection called swiz-
+    // zling. Swizzling allows us to use syntax like this:
+
+    // vec2 someVec;
+    // vec4 differentVec = someVec.xyxx;
+    // vec3 anotherVec = differentVec.zyw;
+    // vec4 otherVec = someVec.xxxx + anotherVec.yxzy;
+
+    // You can use any combination of up to 4 letters to create a new vector (of the same type) as long
+    // as the original vector has those components; it is not allowed to access the .z component of a vec2
+    // for example. We can also pass vectors as arguments to different vector constructor calls, reducing
+    // the number of arguments required:
+
+    // To
+    // define how the vertex data is organized we specify the input variables with location metadata so we
+    // can configure the vertex attributes on the CPU. We’ve seen this in the previous chapter as layout
+    // (location = 0). The vertex shader thus requires an extra layout specification for its inputs so
+    // we can link it with the vertex data.
+
+
     // Create our Vertex Shader
     std::string vertexShaderSource = R"(
         #version 330 core
         layout (location = 0) in vec3 aPos;
+         
+        out vec4 vertexColor; 
 
         void main()
         {
-            gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+        gl_Position = vec4(aPos, 1.0); 
+        vertexColor = vec4(0.5, 0.5, 0.0, 1.0);
         }
     )";
 
@@ -156,11 +200,14 @@ int main()
     // Shader
     std::string fragmentShaderSource = R"(
         #version 330 core
+
         out vec4 FragColor;
+
+        uniform vec4 ourColor;
 
         void main()
         {
-            FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+        FragColor = ourColor;
         }
     )";
 
@@ -222,7 +269,7 @@ int main()
 
 
 
-
+    
 
 
 
@@ -233,6 +280,14 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);  
 
         glUseProgram(shaderProgram); 
+
+        // Uniform
+        float timeValue = glfwGetTime();
+        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+        int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+        
+        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 

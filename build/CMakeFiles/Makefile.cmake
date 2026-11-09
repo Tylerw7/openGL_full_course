@@ -87,6 +87,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/glad.dir/DependInfo.cmake"
+  "CMakeFiles/shaders_4.dir/DependInfo.cmake"
   "CMakeFiles/square.dir/DependInfo.cmake"
   "CMakeFiles/triangle.dir/DependInfo.cmake"
   "CMakeFiles/window.dir/DependInfo.cmake"

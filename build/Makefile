@@ -176,6 +176,19 @@ glad/fast:
 .PHONY : glad/fast
 
 #=============================================================================
+# Target rules for targets named shaders_4
+
+# Build rule for target.
+shaders_4: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 shaders_4
+.PHONY : shaders_4
+
+# fast build rule for target.
+shaders_4/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shaders_4.dir/build.make CMakeFiles/shaders_4.dir/build
+.PHONY : shaders_4/fast
+
+#=============================================================================
 # Target rules for targets named square
 
 # Build rule for target.
@@ -277,6 +290,30 @@ external/glad/src/gl.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/external/glad/src/gl.c.s
 .PHONY : external/glad/src/gl.c.s
 
+lessons/shaders_4/main.o: lessons/shaders_4/main.cpp.o
+.PHONY : lessons/shaders_4/main.o
+
+# target to build an object file
+lessons/shaders_4/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shaders_4.dir/build.make CMakeFiles/shaders_4.dir/lessons/shaders_4/main.cpp.o
+.PHONY : lessons/shaders_4/main.cpp.o
+
+lessons/shaders_4/main.i: lessons/shaders_4/main.cpp.i
+.PHONY : lessons/shaders_4/main.i
+
+# target to preprocess a source file
+lessons/shaders_4/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shaders_4.dir/build.make CMakeFiles/shaders_4.dir/lessons/shaders_4/main.cpp.i
+.PHONY : lessons/shaders_4/main.cpp.i
+
+lessons/shaders_4/main.s: lessons/shaders_4/main.cpp.s
+.PHONY : lessons/shaders_4/main.s
+
+# target to generate assembly for a file
+lessons/shaders_4/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shaders_4.dir/build.make CMakeFiles/shaders_4.dir/lessons/shaders_4/main.cpp.s
+.PHONY : lessons/shaders_4/main.cpp.s
+
 lessons/square/main.o: lessons/square/main.cpp.o
 .PHONY : lessons/square/main.o
 
@@ -365,12 +402,16 @@ help:
 	@echo "... update_mappings"
 	@echo "... glad"
 	@echo "... glfw"
+	@echo "... shaders_4"
 	@echo "... square"
 	@echo "... triangle"
 	@echo "... window"
 	@echo "... external/glad/src/gl.o"
 	@echo "... external/glad/src/gl.i"
 	@echo "... external/glad/src/gl.s"
+	@echo "... lessons/shaders_4/main.o"
+	@echo "... lessons/shaders_4/main.i"
+	@echo "... lessons/shaders_4/main.s"
 	@echo "... lessons/square/main.o"
 	@echo "... lessons/square/main.i"
 	@echo "... lessons/square/main.s"
