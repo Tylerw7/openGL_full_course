@@ -55,6 +55,7 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
     # Create separate executable
     add_executable(${EXAMPLE_NAME}
         "${EXAMPLE_FILE}"
+        "${PROJECT_SOURCE_DIR}/include/Shader.cpp"
     )
 
     target_link_libraries(${EXAMPLE_NAME}
