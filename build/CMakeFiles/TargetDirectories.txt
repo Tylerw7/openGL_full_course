@@ -1,6 +1,7 @@
 /Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles/glad.dir
 /Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles/shaders_4.dir
 /Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles/square.dir
+/Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles/textures.dir
 /Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles/triangle.dir
 /Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles/window.dir
 /Users/tylerwettach/Desktop/C++/opengl_course/build/CMakeFiles/edit_cache.dir

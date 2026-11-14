@@ -6,6 +6,7 @@ file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/Users/tylerwettach/Desktop/C
 set(OLD_GLOB
   "/Users/tylerwettach/Desktop/C++/opengl_course/lessons/shaders_4/main.cpp"
   "/Users/tylerwettach/Desktop/C++/opengl_course/lessons/square/main.cpp"
+  "/Users/tylerwettach/Desktop/C++/opengl_course/lessons/textures/main.cpp"
   "/Users/tylerwettach/Desktop/C++/opengl_course/lessons/triangle/main.cpp"
   "/Users/tylerwettach/Desktop/C++/opengl_course/lessons/window/main.cpp"
   )

@@ -89,6 +89,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/glad.dir/DependInfo.cmake"
   "CMakeFiles/shaders_4.dir/DependInfo.cmake"
   "CMakeFiles/square.dir/DependInfo.cmake"
+  "CMakeFiles/textures.dir/DependInfo.cmake"
   "CMakeFiles/triangle.dir/DependInfo.cmake"
   "CMakeFiles/window.dir/DependInfo.cmake"
   "_deps/glfw-build/CMakeFiles/uninstall.dir/DependInfo.cmake"

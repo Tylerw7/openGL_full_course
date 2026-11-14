@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/window.dir/include/Shader.cpp.o"
+  "CMakeFiles/window.dir/include/Shader.cpp.o.d"
   "CMakeFiles/window.dir/lessons/window/main.cpp.o"
   "CMakeFiles/window.dir/lessons/window/main.cpp.o.d"
   "window"

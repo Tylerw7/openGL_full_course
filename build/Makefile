@@ -202,6 +202,19 @@ square/fast:
 .PHONY : square/fast
 
 #=============================================================================
+# Target rules for targets named textures
+
+# Build rule for target.
+textures: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 textures
+.PHONY : textures
+
+# fast build rule for target.
+textures/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/textures.dir/build.make CMakeFiles/textures.dir/build
+.PHONY : textures/fast
+
+#=============================================================================
 # Target rules for targets named triangle
 
 # Build rule for target.
@@ -290,6 +303,42 @@ external/glad/src/gl.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/external/glad/src/gl.c.s
 .PHONY : external/glad/src/gl.c.s
 
+include/Shader.o: include/Shader.cpp.o
+.PHONY : include/Shader.o
+
+# target to build an object file
+include/Shader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shaders_4.dir/build.make CMakeFiles/shaders_4.dir/include/Shader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/include/Shader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/textures.dir/build.make CMakeFiles/textures.dir/include/Shader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/include/Shader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/window.dir/build.make CMakeFiles/window.dir/include/Shader.cpp.o
+.PHONY : include/Shader.cpp.o
+
+include/Shader.i: include/Shader.cpp.i
+.PHONY : include/Shader.i
+
+# target to preprocess a source file
+include/Shader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shaders_4.dir/build.make CMakeFiles/shaders_4.dir/include/Shader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/include/Shader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/textures.dir/build.make CMakeFiles/textures.dir/include/Shader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/include/Shader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/window.dir/build.make CMakeFiles/window.dir/include/Shader.cpp.i
+.PHONY : include/Shader.cpp.i
+
+include/Shader.s: include/Shader.cpp.s
+.PHONY : include/Shader.s
+
+# target to generate assembly for a file
+include/Shader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shaders_4.dir/build.make CMakeFiles/shaders_4.dir/include/Shader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/include/Shader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/textures.dir/build.make CMakeFiles/textures.dir/include/Shader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/include/Shader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/window.dir/build.make CMakeFiles/window.dir/include/Shader.cpp.s
+.PHONY : include/Shader.cpp.s
+
 lessons/shaders_4/main.o: lessons/shaders_4/main.cpp.o
 .PHONY : lessons/shaders_4/main.o
 
@@ -337,6 +386,30 @@ lessons/square/main.s: lessons/square/main.cpp.s
 lessons/square/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/lessons/square/main.cpp.s
 .PHONY : lessons/square/main.cpp.s
+
+lessons/textures/main.o: lessons/textures/main.cpp.o
+.PHONY : lessons/textures/main.o
+
+# target to build an object file
+lessons/textures/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/textures.dir/build.make CMakeFiles/textures.dir/lessons/textures/main.cpp.o
+.PHONY : lessons/textures/main.cpp.o
+
+lessons/textures/main.i: lessons/textures/main.cpp.i
+.PHONY : lessons/textures/main.i
+
+# target to preprocess a source file
+lessons/textures/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/textures.dir/build.make CMakeFiles/textures.dir/lessons/textures/main.cpp.i
+.PHONY : lessons/textures/main.cpp.i
+
+lessons/textures/main.s: lessons/textures/main.cpp.s
+.PHONY : lessons/textures/main.s
+
+# target to generate assembly for a file
+lessons/textures/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/textures.dir/build.make CMakeFiles/textures.dir/lessons/textures/main.cpp.s
+.PHONY : lessons/textures/main.cpp.s
 
 lessons/triangle/main.o: lessons/triangle/main.cpp.o
 .PHONY : lessons/triangle/main.o
@@ -404,17 +477,24 @@ help:
 	@echo "... glfw"
 	@echo "... shaders_4"
 	@echo "... square"
+	@echo "... textures"
 	@echo "... triangle"
 	@echo "... window"
 	@echo "... external/glad/src/gl.o"
 	@echo "... external/glad/src/gl.i"
 	@echo "... external/glad/src/gl.s"
+	@echo "... include/Shader.o"
+	@echo "... include/Shader.i"
+	@echo "... include/Shader.s"
 	@echo "... lessons/shaders_4/main.o"
 	@echo "... lessons/shaders_4/main.i"
 	@echo "... lessons/shaders_4/main.s"
 	@echo "... lessons/square/main.o"
 	@echo "... lessons/square/main.i"
 	@echo "... lessons/square/main.s"
+	@echo "... lessons/textures/main.o"
+	@echo "... lessons/textures/main.i"
+	@echo "... lessons/textures/main.s"
 	@echo "... lessons/triangle/main.o"
 	@echo "... lessons/triangle/main.i"
 	@echo "... lessons/triangle/main.s"

@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/tylerwettach/Desktop/C++/opengl_course/include/Shader.cpp" "CMakeFiles/window.dir/include/Shader.cpp.o" "gcc" "CMakeFiles/window.dir/include/Shader.cpp.o.d"
   "/Users/tylerwettach/Desktop/C++/opengl_course/lessons/window/main.cpp" "CMakeFiles/window.dir/lessons/window/main.cpp.o" "gcc" "CMakeFiles/window.dir/lessons/window/main.cpp.o.d"
   )
 
