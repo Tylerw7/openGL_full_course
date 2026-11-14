@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/tylerwettach/Desktop/C++/opengl_course/include -I/Users/tylerwettach/Desktop/C++/opengl_course/build/_deps/glfw-src/include -I/Users/tylerwettach/Desktop/C++/opengl_course/external/glad/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks
+CXX_INCLUDES = -I/Users/tylerwettach/Desktop/C++/opengl_course/include -I/Users/tylerwettach/Desktop/C++/opengl_course/build/_deps/stb-src -I/Users/tylerwettach/Desktop/C++/opengl_course/build/_deps/glfw-src/include -I/Users/tylerwettach/Desktop/C++/opengl_course/external/glad/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks
 
 CXX_FLAGSarm64 = -std=c++17 -arch arm64
 

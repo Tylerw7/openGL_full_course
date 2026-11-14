@@ -7,11 +7,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-
-
-
-
-
 int main()
 {
     // --------------------------------
@@ -66,70 +61,103 @@ int main()
     // --------------------------------
     // VERTEX DATA
     // --------------------------------
+    // A quad made of 4 unique vertices. Each vertex packs:
+    //   position (3 floats) | color (3 floats) | texture coords (2 floats)
+    // The two triangles that form the quad are described by the index
+    // array below so the shared corners aren't duplicated.
 
     float vertices[] = {
-
-        // X       Y       Z
-
-         0.0f,   0.5f,   0.0f,  // Top
-        -0.5f,  -0.5f,   0.0f,  // Bottom left
-         0.5f,  -0.5f,   0.0f   // Bottom right
+        // positions          //     colors      //  texture coords
+         0.5f,  0.5f, 0.0f,    1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+         0.5f, -0.5f, 0.0f,    0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f,    0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+        -0.5f,  0.5f, 0.0f,    1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left
     };
 
-   
-
-    float textCoords[] =
-    {
-        0.0f, 0.0f, 
-        1.0f, 0.0f, 
-        0.5f, 1.0f
+    // Indices into the vertex array, two triangles making one quad.
+    unsigned int indices[] = {
+        0, 1, 3, // first triangle  (top right, bottom right, top left)
+        1, 2, 3  // second triangle (bottom right, bottom left, top left)
     };
 
-     // Texture code
+    // --------------------------------
+    // LOAD TEXTURE
+    // --------------------------------
+    // Paths are resolved relative to the working directory the program is
+    // launched from (the project root, same as the shader paths below).
 
     int width, height, nrChannels;
-    unsigned char* data = stbi_load("brick.png", &width, &height, &nrChannels, 0);
+    unsigned char* data = stbi_load(
+        "lessons/textures/brick.png",
+        &width,
+        &height,
+        &nrChannels,
+        0
+    );
+
     unsigned int texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
 
+    // Texture wrapping
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-    // Texture Filtering
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); // The other option is GL_LINEAR
+
+    // Texture filtering
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); // other option: GL_LINEAR
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     if (data)
     {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0 ,GL_RGB,
-                    GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);            
+        // Match the pixel format to the number of channels stb reported so
+        // that an image with an alpha channel (4 channels) isn't uploaded
+        // as if it were RGB.
+        GLenum format = GL_RGB;
+        if (nrChannels == 1)
+            format = GL_RED;
+        else if (nrChannels == 3)
+            format = GL_RGB;
+        else if (nrChannels == 4)
+            format = GL_RGBA;
+
+        glTexImage2D(
+            GL_TEXTURE_2D,
+            0,
+            format,
+            width,
+            height,
+            0,
+            format,
+            GL_UNSIGNED_BYTE,
+            data
+        );
+        glGenerateMipmap(GL_TEXTURE_2D);
     }
     else
     {
-        std::cout << "Failed to load texture" <<std::endl;
+        std::cout << "Failed to load texture\n";
     }
 
-
-
+    stbi_image_free(data);
 
     // --------------------------------
-    // CREATE VAO AND VBO
+    // CREATE VAO, VBO AND EBO
     // --------------------------------
 
     unsigned int VAO;
     unsigned int VBO;
+    unsigned int EBO;
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
 
-    // Bind VAO first
+    // Bind the VAO first; it records the buffer bindings and attribute
+    // layout set up below.
     glBindVertexArray(VAO);
 
-    // Bind VBO
+    // Upload vertex data into the VBO.
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-    // Copy vertex data into GPU memory
     glBufferData(
         GL_ARRAY_BUFFER,
         sizeof(vertices),
@@ -137,19 +165,54 @@ int main()
         GL_STATIC_DRAW
     );
 
-    // Configure vertex attribute
-    glVertexAttribPointer(
-        0,                  // Attribute location
-        3,                  // Number of components
-        GL_FLOAT,           // Data type
-        GL_FALSE,           // Normalize?
-        3 * sizeof(float),  // Stride
-        (void*)0            // Offset
+    // Upload index data into the EBO. The VAO remembers this binding, so the
+    // EBO must stay bound while the VAO is bound (do not unbind it early).
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(
+        GL_ELEMENT_ARRAY_BUFFER,
+        sizeof(indices),
+        indices,
+        GL_STATIC_DRAW
     );
 
+    // Configure the vertex attributes. Each vertex is 8 floats wide.
+
+    // Position attribute (location = 0)
+    glVertexAttribPointer(
+        0,
+        3,
+        GL_FLOAT,
+        GL_FALSE,
+        8 * sizeof(float),
+        (void*)0
+    );
     glEnableVertexAttribArray(0);
 
-    // Unbind
+    // Color attribute (location = 1)
+    glVertexAttribPointer(
+        1,
+        3,
+        GL_FLOAT,
+        GL_FALSE,
+        8 * sizeof(float),
+        (void*)(3 * sizeof(float))
+    );
+    glEnableVertexAttribArray(1);
+
+    // Texture coordinate attribute (location = 2)
+    glVertexAttribPointer(
+        2,
+        2,
+        GL_FLOAT,
+        GL_FALSE,
+        8 * sizeof(float),
+        (void*)(6 * sizeof(float))
+    );
+    glEnableVertexAttribArray(2);
+
+    // Unbind the VBO and VAO. The EBO is intentionally left bound because the
+    // VAO stores the element-buffer binding; unbinding it here would clear
+    // that record. Unbinding the VAO first makes this safe.
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
@@ -161,6 +224,11 @@ int main()
         "shaders/vertex.vert",
         "shaders/fragment.frag"
     );
+
+    // Tell the sampler uniform which texture unit to read from. The texture
+    // is bound to unit 0 in the render loop below.
+    triangleShader.use();
+    glUniform1i(glGetUniformLocation(triangleShader.ID, "outTexture"), 0);
 
     // --------------------------------
     // RENDER LOOP
@@ -178,13 +246,14 @@ int main()
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Activate shader
+        // Bind the texture to unit 0.
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+
+        // Activate shader and draw the quad.
         triangleShader.use();
-
-        // Draw triangle
         glBindVertexArray(VAO);
-
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Swap buffers and process events
         glfwSwapBuffers(window);
@@ -197,6 +266,8 @@ int main()
 
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
+    glDeleteTextures(1, &texture);
 
     glfwDestroyWindow(window);
     glfwTerminate();

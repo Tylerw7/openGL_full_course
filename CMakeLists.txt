@@ -80,6 +80,7 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
 
     target_include_directories(${EXAMPLE_NAME}
         PRIVATE ${PROJECT_SOURCE_DIR}/include
+        ${stb_SOURCE_DIR}
     )
 
 endforeach()
